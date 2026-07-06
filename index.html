@@ -132,8 +132,8 @@
   .reel-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
   .reel-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:400}
   .reel-title em{font-style:italic;color:var(--sil-d)}
-  .reel-frame{position:relative;padding-top:56.25%;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--bdr)}
-  .reel-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block}
+  .reel-frame{width:100%;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--bdr);line-height:0}
+  .reel-frame iframe{width:100%;height:auto;aspect-ratio:16/9;display:block;border:none;min-height:200px}
 
   /* ── CTA BAND ── */
   .cta-band{text-align:center;padding:100px 48px;background:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(201,169,110,.06) 0%,transparent 65%)}
@@ -215,7 +215,7 @@
   <div class="hero-video">
     <!-- NASA / ISS 4K Earth timelapse — cinematic space view of the world rotating -->
     <iframe id="hero-iframe"
-      src="https://www.youtube.com/embed/g2LRkjS-7vA?autoplay=1&mute=1&loop=1&playlist=g2LRkjS-7vA&controls=0&disablekb=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1"
+      src="https://www.youtube.com/embed/DDSBz_JbBfQ?autoplay=1&mute=1&loop=1&playlist=DDSBz_JbBfQ&controls=0&disablekb=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1&start=10"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
@@ -288,8 +288,11 @@
     </div>
     <div class="reel-frame">
       <iframe
+        width="1280" height="720"
         src="https://www.youtube.com/embed/bCOO8bp5RaI?rel=0&modestbranding=1&color=white&playsinline=1"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        title="Icon Studios Universal Demo Reel"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
       </iframe>
     </div>
