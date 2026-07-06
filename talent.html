@@ -105,22 +105,38 @@
   .foot-links a:hover{color:var(--sil)}
   .foot-copy{font-size:10px;color:var(--muted);margin-top:18px;text-align:center;padding-top:18px;border-top:1px solid var(--bdr)}
 
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;flex-shrink:0}
+  .nav-toggle span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.8);transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
   @media(max-width:1100px){.talent-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:768px){nav{padding:0 24px}.nav-links{display:none}.page-header,.search-section,.cat-row,.talent-main{padding-left:20px;padding-right:20px}.talent-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:420px){.talent-grid{grid-template-columns:1fr}}
+  @media(max-width:768px){
+    nav{padding:0 20px}
+    .nav-toggle{display:flex}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(8,8,8,.97);backdrop-filter:blur(24px);flex-direction:column;padding:12px 0 20px;border-bottom:1px solid rgba(255,255,255,.07);gap:0;list-style:none}
+    .nav-links.open{display:flex}
+    .nav-links li a{display:block;padding:14px 24px;font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.7)}
+    .nav-links li a.active,.nav-links li a:hover{color:#fff}
+    .page-header{padding:60px 20px 40px}
+    .search-section,.cat-row,.talent-main{padding-left:20px;padding-right:20px}
+    .talent-grid{grid-template-columns:repeat(2,1fr);gap:2px}
+    .header-h{font-size:48px}
+  }
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <a href="index.html" class="nav-logo"><em>Icon Studios</em> Universal</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="clients.html">Clients</a></li>
     <li><a href="talent.html" class="active">Talent</a></li>
     <li><a href="ourteam.html">Our Team</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="merch.html">Merch</a></li>
   </ul>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="page-header">

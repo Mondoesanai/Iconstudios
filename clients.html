@@ -90,22 +90,40 @@
   .foot-links a:hover{color:var(--sil)}
   .foot-copy{text-align:center;margin:18px auto 0;padding-top:18px;border-top:1px solid var(--bdr);font-size:10px;color:var(--muted);max-width:var(--mw)}
 
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;flex-shrink:0}
+  .nav-toggle span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.8);transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
   @media(max-width:1024px){.page-header{grid-template-columns:1fr}}
-  @media(max-width:900px){.photo-grid{grid-template-columns:repeat(2,1fr)}.work-grid{grid-template-columns:1fr 1fr}.photo-item.wide{grid-column:span 1}.photo-item.tall{grid-row:span 1}.img-h-tall,.img-h-std{height:240px}}
-  @media(max-width:768px){nav{padding:0 24px}.nav-links{display:none}.page-header,.work-section,.clients-cta{padding-left:24px;padding-right:24px}.work-grid{grid-template-columns:1fr}}
+  @media(max-width:900px){.photo-grid{grid-template-columns:repeat(2,1fr)}.work-grid{grid-template-columns:1fr 1fr}.photo-item.wide{grid-column:span 1}.photo-item.tall{grid-row:span 1}.img-h-tall,.img-h-std{height:200px}}
+  @media(max-width:768px){
+    nav{padding:0 20px}
+    .nav-toggle{display:flex}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(8,8,8,.97);backdrop-filter:blur(24px);flex-direction:column;padding:12px 0 20px;border-bottom:1px solid rgba(255,255,255,.07);gap:0;list-style:none}
+    .nav-links.open{display:flex}
+    .nav-links li a{display:block;padding:14px 24px;font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.7)}
+    .nav-links li a.active,.nav-links li a:hover{color:#fff}
+    .page-header{padding:60px 20px 32px}
+    .page-header,.work-section,.clients-cta{padding-left:20px;padding-right:20px}
+    .photo-grid{grid-template-columns:repeat(2,1fr)}
+    .page-stats{flex-wrap:wrap;gap:20px}
+    .work-grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <a href="index.html" class="nav-logo"><em>Icon Studios</em> Universal</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="clients.html" class="active">Clients</a></li>
     <li><a href="talent.html">Talent</a></li>
     <li><a href="ourteam.html">Our Team</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="merch.html">Merch</a></li>
   </ul>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.getElementById('nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- PAGE HEADER -->

@@ -108,8 +108,28 @@
   .powered-by{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px}
   .shopify-badge{background:#96BF48;color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:2px;letter-spacing:.06em}
 
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;flex-shrink:0}
+  .nav-toggle span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.8);transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
   @media(max-width:900px){.product-grid{grid-template-columns:repeat(2,1fr)}.nav-cats{display:none}.collection-hero-text{flex-direction:column;align-items:flex-start;gap:20px;padding:0 32px 40px}}
-  @media(max-width:600px){.product-grid{grid-template-columns:1fr}.nav-search{display:none}.collection-hero-text{padding:0 20px 32px}.collection-hero{height:420px}}
+  @media(max-width:768px){
+    nav{padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    .nav-cats{display:none}
+    .nav-search{display:none}
+    .nav-back{font-size:9px}
+    .filter-bar{padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:flex-start;gap:0}
+    .filter-bar::-webkit-scrollbar{display:none}
+    .filter-tabs{flex-shrink:0}
+    .filter-sort{flex-shrink:0;margin-left:auto;padding-left:12px}
+    .product-grid{padding:20px 16px;gap:12px}
+    .collection-hero{height:360px}
+    .collection-hero-text{padding:0 16px 28px}
+    .hero-shop-btn{padding:12px 22px;font-size:9px}
+  }
+  @media(max-width:600px){.product-grid{grid-template-columns:repeat(2,1fr)}.nav-search{display:none}.collection-hero-text{padding:0 20px 32px}.collection-hero{height:380px}}
+  @media(max-width:420px){.product-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
