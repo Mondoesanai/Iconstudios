@@ -52,7 +52,7 @@
   /* ── HERO ── */
   .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 
-  .hero-video{position:absolute;inset:0;overflow:hidden;background:#000 url('https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/4e649bc7-d1c4-47d8-9714-eeaef939d8a7/homepage2.png') center/cover no-repeat}
+  .hero-video{position:absolute;inset:0;overflow:hidden;background:#000 url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1400&q=80&fit=crop') center/cover no-repeat}
   .hero-video::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18) 0%,rgba(0,0,0,.04) 30%,rgba(8,8,8,.88) 100%)}
   .hero-video iframe{
     position:absolute;top:50%;left:50%;
@@ -132,8 +132,8 @@
   .reel-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
   .reel-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:400}
   .reel-title em{font-style:italic;color:var(--sil-d)}
-  .reel-frame{position:relative;aspect-ratio:16/9;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--bdr)}
-  .reel-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+  .reel-frame{position:relative;padding-top:56.25%;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--bdr)}
+  .reel-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block}
 
   /* ── CTA BAND ── */
   .cta-band{text-align:center;padding:100px 48px;background:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(201,169,110,.06) 0%,transparent 65%)}
@@ -179,7 +179,7 @@
     .nav-links li a.active,.nav-links li a:hover{color:#fff}
     .hero-btns{bottom:140px;left:20px;right:20px;flex-direction:column;gap:10px}
     .btn-hero-gold,.btn-hero-outline{width:100%;justify-content:center;padding:16px 24px}
-    .hero-sound{bottom:72px;right:20px;left:20px;justify-content:center;padding:14px 24px}
+    .hero-sound{display:none}
     .about-top{grid-template-columns:1fr;gap:32px;margin-bottom:36px;padding-bottom:36px}
     .stat-row{grid-template-columns:repeat(2,1fr);gap:28px}
     .stat-col{padding-left:0;border-left:none;border-top:1px solid var(--bdr);padding-top:20px}
@@ -215,7 +215,7 @@
   <div class="hero-video">
     <!-- NASA / ISS 4K Earth timelapse — cinematic space view of the world rotating -->
     <iframe id="hero-iframe"
-      src="https://www.youtube.com/embed/bCOO8bp5RaI?autoplay=1&mute=1&loop=1&playlist=bCOO8bp5RaI&controls=0&disablekb=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1"
+      src="https://www.youtube.com/embed/g2LRkjS-7vA?autoplay=1&mute=1&loop=1&playlist=g2LRkjS-7vA&controls=0&disablekb=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&enablejsapi=1&playsinline=1"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
