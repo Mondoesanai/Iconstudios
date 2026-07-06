@@ -52,7 +52,7 @@
   /* ── HERO ── */
   .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 
-  .hero-video{position:absolute;inset:0;overflow:hidden;background:#000}
+  .hero-video{position:absolute;inset:0;overflow:hidden;background:#000 url('https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/4e649bc7-d1c4-47d8-9714-eeaef939d8a7/homepage2.png') center/cover no-repeat}
   .hero-video::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18) 0%,rgba(0,0,0,.04) 30%,rgba(8,8,8,.88) 100%)}
   .hero-video iframe{
     position:absolute;top:50%;left:50%;
@@ -177,14 +177,15 @@
     .nav-links.open{display:flex}
     .nav-links li a{display:block;padding:14px 24px;font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.7)}
     .nav-links li a.active,.nav-links li a:hover{color:#fff}
-    .hero-btns{bottom:100px;left:20px;right:20px;flex-direction:column;gap:10px}
+    .hero-btns{bottom:140px;left:20px;right:20px;flex-direction:column;gap:10px}
     .btn-hero-gold,.btn-hero-outline{width:100%;justify-content:center;padding:16px 24px}
-    .hero-sound{bottom:44px;right:20px;left:20px;justify-content:center;padding:14px 24px}
+    .hero-sound{bottom:72px;right:20px;left:20px;justify-content:center;padding:14px 24px}
     .about-top{grid-template-columns:1fr;gap:32px;margin-bottom:36px;padding-bottom:36px}
     .stat-row{grid-template-columns:repeat(2,1fr);gap:28px}
     .stat-col{padding-left:0;border-left:none;border-top:1px solid var(--bdr);padding-top:20px}
     .stat-col:nth-child(-n+2){border-top:none;padding-top:0}
     .img-strip{grid-template-columns:repeat(4,1fr);height:180px}
+    .img-strip a:nth-child(n+5){display:none}
     .about,.reel,.cta-band{padding:56px 20px}
     .foot-grid{grid-template-columns:1fr;gap:28px}
     .foot-bottom{flex-direction:column;gap:8px;text-align:center}
@@ -287,7 +288,7 @@
     </div>
     <div class="reel-frame">
       <iframe
-        src="https://www.youtube.com/embed/bCOO8bp5RaI?rel=0&modestbranding=1&color=white"
+        src="https://www.youtube.com/embed/bCOO8bp5RaI?rel=0&modestbranding=1&color=white&playsinline=1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
