@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Icon Studios Universal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0c0c0c;--surf:#111;--surf2:#161616;--bdr:rgba(255,255,255,0.08);
+    --sil:#B8C0CC;--sil-l:#DDE2EA;--sil-d:#7A8090;
+    --gold:#C9A96E;--text:#F2F0F2;--muted:#6A6A6A;
+    --err:#e05555;--ok:#4CAF50;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;min-height:100vh}
+
+  /* ── TOP ── */
+  .co-top{background:var(--surf);border-bottom:1px solid var(--bdr);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .co-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;letter-spacing:.08em;color:var(--text)}
+  .co-logo span{color:var(--sil-d)}
+  .co-breadcrumb{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .co-breadcrumb a{color:var(--sil-d);text-decoration:none;transition:color .2s}
+  .co-breadcrumb a:hover{color:var(--sil)}
+  .co-breadcrumb .active{color:var(--text)}
+  .co-back{font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+  .co-back:hover{color:var(--sil)}
+
+  /* ── LAYOUT ── */
+  .co-wrap{max-width:1160px;margin:0 auto;padding:48px 32px;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start}
+
+  /* ── FORM SIDE ── */
+  .form-side{}
+  .form-section{margin-bottom:36px}
+  .form-section-title{font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--sil-d);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--bdr)}
+
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .form-row.full{grid-template-columns:1fr}
+  .form-row.tri{grid-template-columns:1fr 1fr 1fr}
+  .form-field{display:flex;flex-direction:column;gap:5px}
+  .form-field label{font-size:9.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sil-d)}
+  .form-field input,.form-field select{background:var(--surf);border:1px solid var(--bdr);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;padding:11px 14px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;width:100%}
+  .form-field input::placeholder{color:var(--muted)}
+  .form-field input:focus,.form-field select:focus{border-color:rgba(184,192,204,.35)}
+  .form-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A8090' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer}
+
+  /* shipping options */
+  .ship-options{display:flex;flex-direction:column;gap:8px}
+  .ship-opt{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--surf);border:1px solid var(--bdr);cursor:pointer;transition:border-color .2s}
+  .ship-opt.selected{border-color:var(--sil)}
+  .ship-opt input[type=radio]{display:none}
+  .ship-opt-left{display:flex;align-items:center;gap:12px}
+  .ship-radio{width:16px;height:16px;border:2px solid var(--bdr);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ship-opt.selected .ship-radio{border-color:var(--sil)}
+  .ship-radio-dot{width:8px;height:8px;border-radius:50%;background:var(--sil);display:none}
+  .ship-opt.selected .ship-radio-dot{display:block}
+  .ship-name{font-size:12px;font-weight:500;color:var(--text)}
+  .ship-time{font-size:10.5px;color:var(--muted);margin-top:2px}
+  .ship-price{font-size:13px;font-weight:500;color:var(--text)}
+
+  /* payment */
+  .pay-secure{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted);margin-bottom:16px}
+  .pay-methods{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+  .pay-badge{background:var(--surf2);border:1px solid var(--bdr);padding:4px 10px;font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--sil-d)}
+  .card-icons{display:flex;gap:6px;margin-bottom:14px}
+  .card-icon{background:var(--surf2);border:1px solid var(--bdr);border-radius:3px;width:44px;height:28px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;letter-spacing:.04em;color:var(--sil-d)}
+
+  /* SUBMIT */
+  .btn-submit{width:100%;padding:17px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;border:none;background:linear-gradient(135deg,#C0C6D0,#EEF0F4,#B0B6C0);color:#0a0a0a;transition:transform .2s,box-shadow .2s;margin-top:6px}
+  .btn-submit:hover{transform:translateY(-1px);box-shadow:0 10px 40px rgba(200,205,214,.22)}
+  .co-terms{font-size:10px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6}
+  .co-terms a{color:var(--sil-d);text-decoration:none}
+
+  /* ── ORDER SUMMARY ── */
+  .order-side{background:var(--surf);border:1px solid var(--bdr);position:sticky;top:24px}
+  .order-top{padding:20px 24px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+  .order-top-title{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sil-d)}
+  .order-top-price{font-size:16px;font-weight:500;color:var(--text)}
+  .order-body{padding:20px 24px}
+  .order-items{display:flex;flex-direction:column;gap:16px;margin-bottom:20px}
+  .order-item{display:flex;gap:14px;align-items:center}
+  .item-thumb{position:relative;width:60px;height:75px;background:var(--surf2);flex-shrink:0;overflow:hidden}
+  .item-thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.85)}
+  .item-qty-badge{position:absolute;top:-6px;right:-6px;background:var(--sil-d);color:#0a0a0a;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .item-info{flex:1}
+  .item-name{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
+  .item-var{font-size:10.5px;color:var(--muted)}
+  .item-price{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap}
+
+  .coupon-row{display:flex;gap:8px;margin-bottom:20px}
+  .coupon-input{flex:1;background:var(--surf2);border:1px solid var(--bdr);color:var(--text);font-family:'Inter',sans-serif;font-size:12px;padding:10px 12px;outline:none;transition:border-color .2s}
+  .coupon-input::placeholder{color:var(--muted)}
+  .coupon-input:focus{border-color:rgba(184,192,204,.3)}
+  .coupon-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--sil-d);font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s}
+  .coupon-btn:hover{color:var(--sil);border-color:rgba(184,192,204,.25)}
+
+  .order-lines{display:flex;flex-direction:column;gap:10px}
+  .order-line{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+  .order-line .lbl{color:var(--muted)}
+  .order-line .val{color:var(--text);font-weight:500}
+  .order-line.total{border-top:1px solid var(--bdr);padding-top:12px;margin-top:4px}
+  .order-line.total .lbl{font-size:13px;font-weight:600;color:var(--text)}
+  .order-line.total .val{font-size:16px;font-weight:600;color:var(--text)}
+  .currency-note{font-size:10px;color:var(--muted);margin-top:4px;text-align:right}
+
+  /* FOOTER */
+  .co-footer{background:var(--surf);border-top:1px solid var(--bdr);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .co-footer-links{display:flex;gap:20px;flex-wrap:wrap}
+  .co-footer-links a{font-size:10px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .co-footer-links a:hover{color:var(--sil)}
+  .co-footer p{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .shopify-badge{background:#96BF48;color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:2px}
+
+  @media(max-width:860px){.co-wrap{grid-template-columns:1fr;gap:36px}.order-side{position:static}}
+  @media(max-width:600px){.co-wrap{padding:24px 16px}.form-row{grid-template-columns:1fr}.form-row.tri{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="co-top">
+  <a href="index.html" class="co-logo">Icon Studios Universal <span>/ Shop</span></a>
+  <div class="co-breadcrumb">
+    <a href="merch.html">Cart</a>
+    <span>›</span>
+    <a href="#">Information</a>
+    <span>›</span>
+    <a href="#">Shipping</a>
+    <span>›</span>
+    <span class="active">Payment</span>
+  </div>
+  <a href="merch.html" class="co-back">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Return to shop
+  </a>
+</div>
+
+<div class="co-wrap">
+
+  <!-- FORM SIDE -->
+  <div class="form-side">
+
+    <!-- CONTACT -->
+    <div class="form-section">
+      <p class="form-section-title">Contact</p>
+      <div class="form-row full">
+        <div class="form-field">
+          <label>Email or mobile number</label>
+          <input type="email" placeholder="email@example.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIPPING ADDRESS -->
+    <div class="form-section">
+      <p class="form-section-title">Shipping Address</p>
+      <div class="form-row">
+        <div class="form-field">
+          <label>First name</label>
+          <input type="text" placeholder="First name">
+        </div>
+        <div class="form-field">
+          <label>Last name</label>
+          <input type="text" placeholder="Last name">
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label>Address</label>
+          <input type="text" placeholder="Street address">
+        </div>
+      </div>
+      <div class="form-row full" style="margin-bottom:10px">
+        <div class="form-field">
+          <input type="text" placeholder="Apartment, suite, etc. (optional)">
+        </div>
+      </div>
+      <div class="form-row tri">
+        <div class="form-field">
+          <label>City</label>
+          <input type="text" placeholder="City">
+        </div>
+        <div class="form-field">
+          <label>State</label>
+          <select>
+            <option value="">State</option>
+            <option>TX</option><option>CA</option><option>NY</option><option>FL</option><option>GA</option>
+            <option>IL</option><option>OH</option><option>PA</option><option>NC</option><option>VA</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>ZIP code</label>
+          <input type="text" placeholder="ZIP">
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIPPING METHOD -->
+    <div class="form-section">
+      <p class="form-section-title">Shipping Method</p>
+      <div class="ship-options">
+        <div class="ship-opt" onclick="selectShip(this,'free')">
+          <div class="ship-opt-left">
+            <div class="ship-radio"><div class="ship-radio-dot"></div></div>
+            <div>
+              <p class="ship-name">ICU Standard Shipping</p>
+              <p class="ship-time">3–5 business days · USPS Priority</p>
+            </div>
+          </div>
+          <span class="ship-price" id="ship-free-price">Free</span>
+        </div>
+        <div class="ship-opt selected" onclick="selectShip(this,'express')">
+          <div class="ship-opt-left">
+            <div class="ship-radio"><div class="ship-radio-dot"></div></div>
+            <div>
+              <p class="ship-name">Express Delivery</p>
+              <p class="ship-time">1–2 business days · FedEx Overnight</p>
+            </div>
+          </div>
+          <span class="ship-price">$12.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="form-section">
+      <p class="form-section-title">Payment</p>
+      <div class="pay-secure">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        All transactions are secure and encrypted.
+      </div>
+      <div class="pay-methods">
+        <div class="pay-badge">Visa</div>
+        <div class="pay-badge">Mastercard</div>
+        <div class="pay-badge">Amex</div>
+        <div class="pay-badge">Apple Pay</div>
+        <div class="pay-badge">Shop Pay</div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label>Card number</label>
+          <input type="text" placeholder="1234  5678  9012  3456" maxlength="19" oninput="formatCard(this)">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Expiration date (MM/YY)</label>
+          <input type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+        </div>
+        <div class="form-field">
+          <label>Security code (CVV)</label>
+          <input type="text" placeholder="CVV" maxlength="4">
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-field">
+          <label>Name on card</label>
+          <input type="text" placeholder="Full name as shown on card">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-submit" onclick="handleSubmit(this)">Complete Order</button>
+    <p class="co-terms">By completing your purchase you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+  </div>
+
+  <!-- ORDER SUMMARY -->
+  <div class="order-side">
+    <div class="order-top">
+      <div class="order-top-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Order Summary
+      </div>
+      <span class="order-top-price" id="summary-total">$100.00</span>
+    </div>
+    <div class="order-body">
+      <div class="order-items" id="order-items">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="coupon-row">
+        <input type="text" class="coupon-input" placeholder="Discount code or gift card">
+        <button class="coupon-btn" onclick="applyCoupon(this)">Apply</button>
+      </div>
+
+      <div class="order-lines">
+        <div class="order-line">
+          <span class="lbl">Subtotal</span>
+          <span class="val" id="subtotal">$88.00</span>
+        </div>
+        <div class="order-line">
+          <span class="lbl">Shipping</span>
+          <span class="val" id="ship-cost">$12.00</span>
+        </div>
+        <div class="order-line">
+          <span class="lbl">Estimated tax</span>
+          <span class="val" id="tax">$7.26</span>
+        </div>
+        <div class="order-line total">
+          <span class="lbl">Total</span>
+          <span class="val" id="total">$107.26</span>
+        </div>
+      </div>
+      <p class="currency-note">USD · All prices in US dollars</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="co-footer">
+  <div class="co-footer-links">
+    <a href="#">Refund policy</a>
+    <a href="#">Shipping policy</a>
+    <a href="#">Terms of service</a>
+    <a href="#">Privacy policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>Powered by <span class="shopify-badge">Shopify</span></p>
+</div>
+
+<script>
+// ── Load cart from localStorage ──
+let cart = JSON.parse(localStorage.getItem('icu-cart')||'[]');
+
+const productImages = {
+  'ICU Classic Tee':'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop',
+  'ICU Premium Hoodie':'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=200&q=70&fit=crop',
+  'ICU Fitted Cap':'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&q=70&fit=crop',
+  'ICU Bomber Jacket':'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&q=70&fit=crop',
+  'ICU Track Pants':'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=70&fit=crop',
+  'ICU Duffel Bag':'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=70&fit=crop',
+};
+
+// Default demo cart if empty
+if(!cart.length){
+  cart=[
+    {name:'ICU Classic Tee',price:'$35.00',qty:1},
+    {name:'ICU Premium Hoodie',price:'$65.00',qty:1}
+  ];
+}
+
+function renderCart(){
+  const el=document.getElementById('order-items');
+  if(!el) return;
+  // Aggregate
+  const agg={};
+  cart.forEach(i=>{if(!agg[i.name]){agg[i.name]={...i,count:0}}agg[i.name].count++});
+  el.innerHTML=Object.values(agg).map(i=>`
+    <div class="order-item">
+      <div class="item-thumb">
+        <img src="${productImages[i.name]||'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop'}" alt="${i.name}" onerror="this.style.display='none'">
+        <div class="item-qty-badge">${i.count}</div>
+      </div>
+      <div class="item-info">
+        <p class="item-name">${i.name}</p>
+        <p class="item-var">Size M · Onyx Black</p>
+      </div>
+      <span class="item-price">${i.price}</span>
+    </div>
+  `).join('');
+  // Calculate totals
+  let sub=0;
+  Object.values(agg).forEach(i=>{sub+=parseFloat(i.price.replace('$',''))*i.count});
+  const shipCost = currentShip==='free'&&sub>=75?0:currentShip==='free'?8.99:12;
+  const tax=sub*0.0825;
+  const total=sub+shipCost+tax;
+  const fmtShip=sub>=75&&currentShip==='free'?'Free':('$'+shipCost.toFixed(2));
+  document.getElementById('subtotal').textContent='$'+sub.toFixed(2);
+  document.getElementById('ship-cost').textContent=fmtShip;
+  document.getElementById('tax').textContent='$'+tax.toFixed(2);
+  document.getElementById('total').textContent='$'+total.toFixed(2);
+  document.getElementById('summary-total').textContent='$'+total.toFixed(2);
+  const shipFreeEl=document.getElementById('ship-free-price');
+  if(shipFreeEl) shipFreeEl.textContent=sub>=75?'Free':'$8.99';
+}
+
+let currentShip='express';
+function selectShip(el,type){
+  document.querySelectorAll('.ship-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  currentShip=type;
+  renderCart();
+}
+
+renderCart();
+
+function formatCard(i){
+  let v=i.value.replace(/\D/g,'').replace(/(\d{4})/g,'$1  ').trim();
+  i.value=v.substring(0,22);
+}
+function formatExpiry(i){
+  let v=i.value.replace(/\D/g,'');
+  if(v.length>2) v=v.substring(0,2)+' / '+v.substring(2,4);
+  i.value=v;
+}
+function applyCoupon(btn){
+  const inp=btn.previousElementSibling;
+  if(!inp.value.trim()){inp.style.borderColor='var(--err)';setTimeout(()=>inp.style.borderColor='',1500);return}
+  btn.textContent='Applied ✓';btn.style.color='var(--ok)';inp.style.borderColor='var(--ok)';
+}
+function handleSubmit(btn){
+  btn.textContent='Processing…';btn.style.background='linear-gradient(135deg,#2a2a2a,#333)';btn.style.color='var(--sil-d)';
+  setTimeout(()=>{
+    btn.textContent='✓ Order Confirmed!';btn.style.background='linear-gradient(135deg,#4CAF50,#388E3C)';btn.style.color='#fff';
+    localStorage.removeItem('icu-cart');
+    setTimeout(()=>window.location.href='index.html',2200);
+  },1600);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICU Classic Tee — Icon Studios Universal Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0c0c0c;--surf:#111;--surf2:#161616;--bdr:rgba(255,255,255,0.08);
+    --sil:#B8C0CC;--sil-l:#DDE2EA;--sil-d:#7A8090;
+    --gold:#C9A96E;--text:#F2F0F2;--muted:#6A6A6A;
+    --mw:1340px;--nav-h:60px;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+
+  .top-banner{background:var(--surf);height:36px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .top-banner strong{color:var(--sil-d);font-weight:500}
+
+  nav{background:var(--bg);border-bottom:1px solid var(--bdr);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:200}
+  .nav-left{display:flex;align-items:center;gap:0}
+  .back-link{font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:7px;transition:color .2s;padding-right:24px;border-right:1px solid var(--bdr);margin-right:24px}
+  .back-link:hover{color:var(--sil)}
+  .store-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;letter-spacing:.08em;color:var(--text)}
+  .store-name span{color:var(--sil-d)}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .cart-link{display:flex;align-items:center;gap:8px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;border:1px solid var(--bdr);padding:8px 16px}
+  .cart-link:hover{color:var(--text);border-color:rgba(184,192,204,.22)}
+  .cart-ct{background:var(--sil);color:#000;font-size:8.5px;font-weight:700;min-width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 3px}
+
+  /* BREADCRUMB */
+  .breadcrumb{max-width:var(--mw);margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--muted)}
+  .breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .breadcrumb a:hover{color:var(--sil)}
+  .breadcrumb span{color:var(--muted)}
+
+  /* PRODUCT LAYOUT */
+  .product-page{max-width:var(--mw);margin:0 auto;padding:0 32px 80px;display:grid;grid-template-columns:1fr 480px;gap:56px;align-items:start}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:start}
+  .gallery-thumbs{display:flex;flex-direction:column;gap:8px}
+  .gallery-thumbs button{width:72px;height:90px;padding:0;border:2px solid transparent;cursor:pointer;overflow:hidden;background:var(--surf);transition:border-color .2s}
+  .gallery-thumbs button.active{border-color:var(--sil)}
+  .gallery-thumbs button img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8)}
+  .gallery-main{position:relative;overflow:hidden;background:var(--surf)}
+  .gallery-main img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+  .gallery-badge{position:absolute;top:16px;left:16px;background:var(--gold);color:#050505;font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px}
+
+  /* PRODUCT INFO */
+  .product-info{padding-top:8px}
+  .info-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .product-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:400;letter-spacing:.01em;line-height:1.05;margin-bottom:6px}
+  .product-subtitle{font-size:12px;color:var(--muted);letter-spacing:.06em;margin-bottom:22px}
+  .product-price{font-size:26px;font-weight:500;color:var(--text);margin-bottom:6px}
+  .product-shipping{font-size:11px;color:var(--muted);margin-bottom:28px}
+  .product-shipping a{color:var(--sil-d);text-decoration:none}
+
+  /* REVIEWS */
+  .product-reviews{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+  .stars{color:var(--gold);font-size:13px;letter-spacing:1px}
+  .review-count{font-size:11px;color:var(--muted);text-decoration:underline;cursor:pointer}
+
+  /* DIVIDER */
+  .info-divider{height:1px;background:var(--bdr);margin:24px 0}
+
+  /* OPTION GROUP */
+  .option-group{margin-bottom:22px}
+  .option-label{font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sil-d);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+  .option-label a{font-size:9.5px;color:var(--muted);text-decoration:underline;cursor:pointer;font-weight:400;letter-spacing:0;text-transform:none}
+  .color-swatches{display:flex;gap:8px}
+  .swatch{width:30px;height:30px;border:2px solid transparent;border-radius:50%;cursor:pointer;transition:border-color .2s;position:relative}
+  .swatch.active{border-color:var(--sil)}
+  .swatch::after{content:'';position:absolute;inset:3px;border-radius:50%;background:inherit}
+  .size-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+  .size-btn{background:var(--surf2);border:1px solid var(--bdr);color:var(--sil-d);font-family:'Inter',sans-serif;font-size:11px;font-weight:500;padding:10px 4px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;text-align:center}
+  .size-btn:hover{border-color:rgba(184,192,204,.3);color:var(--text)}
+  .size-btn.active{border-color:var(--sil);color:var(--text);background:rgba(184,192,204,.06)}
+  .size-btn.sold-out{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+
+  /* QUANTITY */
+  .qty-row{display:flex;align-items:center;gap:0;border:1px solid var(--bdr);width:fit-content;margin-bottom:20px}
+  .qty-btn{background:transparent;border:none;color:var(--sil-d);font-size:16px;width:40px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;transition:color .2s}
+  .qty-btn:hover{color:var(--text)}
+  .qty-input{background:transparent;border:none;border-left:1px solid var(--bdr);border-right:1px solid var(--bdr);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;width:48px;height:44px;text-align:center;outline:none}
+
+  /* CTA BUTTONS */
+  .cta-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+  .btn-add{width:100%;padding:16px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:none;background:linear-gradient(135deg,#C0C6D0,#EEF0F4,#B0B6C0);color:#0a0a0a;transition:transform .2s,box-shadow .2s}
+  .btn-add:hover{transform:translateY(-1px);box-shadow:0 8px 32px rgba(200,205,214,.2)}
+  .btn-buy{width:100%;padding:16px;font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--sil-d);transition:border-color .2s,color .2s}
+  .btn-buy:hover{border-color:rgba(184,192,204,.3);color:var(--text)}
+
+  /* PRODUCT PERKS */
+  .perks{display:flex;flex-direction:column;gap:10px;padding:18px;background:var(--surf);border:1px solid var(--bdr)}
+  .perk{display:flex;align-items:center;gap:12px;font-size:11px;color:var(--muted)}
+  .perk svg{flex-shrink:0;color:var(--sil-d)}
+
+  /* DESCRIPTION TABS */
+  .desc-tabs{border-top:1px solid var(--bdr);margin-top:32px}
+  .tab-headers{display:flex;border-bottom:1px solid var(--bdr)}
+  .tab-hdr{font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:16px 20px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif;transition:color .2s,border-color .2s}
+  .tab-hdr.active{color:var(--text);border-bottom-color:var(--sil)}
+  .tab-content{display:none;padding:24px 0;font-size:13px;color:var(--muted);line-height:1.8}
+  .tab-content.active{display:block}
+  .tab-content ul{padding-left:18px}
+  .tab-content li{margin-bottom:6px}
+
+  /* RELATED */
+  .related{max-width:var(--mw);margin:0 auto;padding:0 32px 80px;border-top:1px solid var(--bdr)}
+  .related h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,40px);font-weight:400;margin:48px 0 28px;letter-spacing:.02em}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .rel-card{text-decoration:none;color:var(--text);display:block;background:var(--surf)}
+  .rel-card:hover .rel-img img{transform:scale(1.04)}
+  .rel-img{overflow:hidden;aspect-ratio:4/5}
+  .rel-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);transition:transform .5s ease}
+  .rel-info{padding:14px 16px 18px}
+  .rel-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:4px}
+  .rel-price{font-size:13px;font-weight:500;color:var(--text)}
+
+  footer{background:var(--surf);border-top:1px solid var(--bdr);padding:32px;text-align:center}
+  .foot-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px}
+  .foot-links a{font-size:10.5px;color:var(--muted);text-decoration:none;letter-spacing:.06em;transition:color .2s}
+  .foot-links a:hover{color:var(--sil)}
+  .foot-copy{font-size:10px;color:var(--muted)}
+
+  @media(max-width:1024px){.product-page{grid-template-columns:1fr;gap:32px}.gallery{grid-template-columns:60px 1fr;gap:8px}}
+  @media(max-width:600px){.product-page{padding:0 16px 48px}.breadcrumb{padding:14px 16px}.gallery{grid-template-columns:1fr}.gallery-thumbs{flex-direction:row;gap:6px}.gallery-thumbs button{width:60px;height:75px}.size-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="top-banner">Free standard shipping on orders over <strong>&nbsp;$75</strong></div>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="back-link">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      iconstudiosuniversal.com
+    </a>
+    <div class="store-name">Icon Studios Universal <span>/ Shop</span></div>
+  </div>
+  <div class="nav-right">
+    <a href="checkout.html" class="cart-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cart <span class="cart-ct" id="cart-count">0</span>
+    </a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <a href="merch.html">Shop</a>
+  <span>›</span>
+  <a href="#">All Products</a>
+  <span>›</span>
+  <span id="crumb-name" style="color:var(--sil-d)">ICU Classic Tee</span>
+</div>
+
+<div class="product-page">
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-thumbs" id="thumbs">
+      <button class="active" onclick="setImg(this,'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&h=1200&q=80&fit=crop')">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop" alt="View 1">
+      </button>
+      <button onclick="setImg(this,'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=900&h=1200&q=80&fit=crop')">
+        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=200&q=70&fit=crop" alt="View 2">
+      </button>
+      <button onclick="setImg(this,'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=900&h=1200&q=80&fit=crop')">
+        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200&q=70&fit=crop" alt="View 3">
+      </button>
+    </div>
+    <div class="gallery-main">
+      <img id="main-img" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&h=1200&q=80&fit=crop" alt="ICU Classic Tee">
+      <div class="gallery-badge" id="prod-badge">New Arrival</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT INFO -->
+  <div class="product-info">
+    <p class="info-label" id="prod-category">Tops</p>
+    <h1 class="product-title" id="prod-title">ICU Classic Tee</h1>
+    <p class="product-subtitle" id="prod-subtitle">Premium heavyweight cotton · Unisex</p>
+
+    <div class="product-reviews">
+      <div class="stars">★★★★★</div>
+      <span class="review-count">48 reviews</span>
+    </div>
+
+    <p class="product-price" id="prod-price">$35.00</p>
+    <p class="product-shipping">Free shipping on orders over $75 &nbsp;·&nbsp; <a href="#">Shipping policy</a></p>
+
+    <div class="info-divider"></div>
+
+    <!-- COLORS -->
+    <div class="option-group">
+      <p class="option-label">Color: <span id="color-name" style="color:var(--text);font-weight:500;font-size:9.5px;letter-spacing:.05em;text-transform:none">Onyx Black</span></p>
+      <div class="color-swatches">
+        <div class="swatch active" style="background:#0a0a0a;border-color:var(--sil)" title="Onyx Black" onclick="selectColor(this,'Onyx Black')"></div>
+        <div class="swatch" style="background:#1a1a2e" title="Midnight Navy" onclick="selectColor(this,'Midnight Navy')"></div>
+        <div class="swatch" style="background:#2c2c2c" title="Charcoal" onclick="selectColor(this,'Charcoal')"></div>
+        <div class="swatch" style="background:#1c1c1c;background:linear-gradient(135deg,#1c1c1c,#333)" title="Slate" onclick="selectColor(this,'Slate')"></div>
+      </div>
+    </div>
+
+    <!-- SIZES -->
+    <div class="option-group">
+      <p class="option-label">Size <a href="#size-guide">Size guide</a></p>
+      <div class="size-grid">
+        <button class="size-btn sold-out" title="Sold out">XS</button>
+        <button class="size-btn" onclick="selectSize(this)">S</button>
+        <button class="size-btn active" onclick="selectSize(this)">M</button>
+        <button class="size-btn" onclick="selectSize(this)">L</button>
+        <button class="size-btn" onclick="selectSize(this)">XL</button>
+        <button class="size-btn" onclick="selectSize(this)">XXL</button>
+      </div>
+    </div>
+
+    <!-- QUANTITY -->
+    <div class="option-group">
+      <p class="option-label">Quantity</p>
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <input type="number" class="qty-input" id="qty" value="1" min="1" max="10">
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <div class="cta-stack">
+      <button class="btn-add" id="add-btn" onclick="addToCart()">Add to Cart</button>
+      <button class="btn-buy" onclick="window.location='checkout.html'">Buy it Now</button>
+    </div>
+
+    <!-- PERKS -->
+    <div class="perks">
+      <div class="perk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Free shipping on orders over $75
+      </div>
+      <div class="perk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Free returns within 30 days
+      </div>
+      <div class="perk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Secure checkout · SSL encrypted
+      </div>
+    </div>
+
+    <!-- DESC TABS -->
+    <div class="desc-tabs">
+      <div class="tab-headers">
+        <button class="tab-hdr active" onclick="openTab(this,'desc')">Description</button>
+        <button class="tab-hdr" onclick="openTab(this,'details')">Details</button>
+        <button class="tab-hdr" onclick="openTab(this,'ship')">Shipping</button>
+      </div>
+      <div class="tab-content active" id="desc">
+        The ICU Classic Tee is the cornerstone of the Icon Collection. Cut from premium 100% heavyweight cotton for that structured, intentional drape — made for the camera, the stage, or the city.
+      </div>
+      <div class="tab-content" id="details">
+        <ul>
+          <li>100% 220 GSM ring-spun cotton</li>
+          <li>Unisex relaxed fit — size up for oversized look</li>
+          <li>Reinforced crew neck & seams</li>
+          <li>Embroidered ICU logo at left chest</li>
+          <li>Machine wash cold, tumble dry low</li>
+          <li>Made in the USA</li>
+        </ul>
+      </div>
+      <div class="tab-content" id="ship">
+        Standard shipping (3–5 business days) — Free on orders over $75<br>
+        Express shipping (1–2 business days) — $12.00<br>
+        International shipping available at checkout.<br>
+        Free 30-day returns on all orders.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h2>You May Also Like</h2>
+  <div class="related-grid">
+    <a href="product.html?id=hoodie" class="rel-card">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=600&h=750&q=80&fit=crop" alt="Hoodie" loading="lazy"></div>
+      <div class="rel-info"><p class="rel-name">ICU Premium Hoodie</p><p class="rel-price">$65.00</p></div>
+    </a>
+    <a href="product.html?id=jacket" class="rel-card">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=750&q=80&fit=crop" alt="Jacket" loading="lazy"></div>
+      <div class="rel-info"><p class="rel-name">ICU Bomber Jacket</p><p class="rel-price">$120.00</p></div>
+    </a>
+    <a href="product.html?id=pants" class="rel-card">
+      <div class="rel-img"><img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=750&q=80&fit=crop" alt="Pants" loading="lazy"></div>
+      <div class="rel-info"><p class="rel-name">ICU Track Pants</p><p class="rel-price">$55.00</p></div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-links">
+    <a href="merch.html">← Back to Shop</a>
+    <a href="index.html">Main Site</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p class="foot-copy">© 2025 Icon Studios Universal · Powered by <strong>Shopify</strong></p>
+</footer>
+
+<script>
+// Cart
+let cart = JSON.parse(localStorage.getItem('icu-cart')||'[]');
+function updateCartUI(){const c=document.getElementById('cart-count');if(c)c.textContent=cart.length}
+updateCartUI();
+
+// Product data
+const products = {
+  tee:{title:'ICU Classic Tee',subtitle:'Premium heavyweight cotton · Unisex',price:'$35.00',badge:'New Arrival',category:'Tops',
+    img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=200&q=70&fit=crop'},
+  hoodie:{title:'ICU Premium Hoodie',subtitle:'Heavyweight fleece · Relaxed fit',price:'$65.00',badge:'Bestseller',category:'Tops',
+    img:'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop'},
+  cap:{title:'ICU Fitted Cap',subtitle:'Premium embroidered cap · One size',price:'$28.00',badge:'New Arrival',category:'Accessories',
+    img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop'},
+  jacket:{title:'ICU Bomber Jacket',subtitle:'Premium satin shell · Limited edition',price:'$120.00',badge:'Limited Drop',category:'Outerwear',
+    img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=70&fit=crop'},
+  pants:{title:'ICU Track Pants',subtitle:'Smooth poly fleece · Tapered fit',price:'$55.00',badge:'',category:'Tops',
+    img:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=70&fit=crop'},
+  bag:{title:'ICU Duffel Bag',subtitle:'Canvas & leather trim · 40L capacity',price:'$75.00',badge:'',category:'Bags',
+    img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=900&h=1200&q=80&fit=crop',
+    t1:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=70&fit=crop',
+    t2:'https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&q=70&fit=crop',
+    t3:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&q=70&fit=crop'},
+};
+
+// Load product from URL
+const id = new URLSearchParams(location.search).get('id')||'tee';
+const p = products[id]||products.tee;
+document.getElementById('prod-title').textContent = p.title;
+document.getElementById('prod-subtitle').textContent = p.subtitle;
+document.getElementById('prod-price').textContent = p.price;
+document.getElementById('prod-category').textContent = p.category;
+document.getElementById('crumb-name').textContent = p.title;
+document.title = p.title + ' — Icon Studios Universal Shop';
+const badgeEl = document.getElementById('prod-badge');
+if(p.badge){badgeEl.textContent=p.badge;badgeEl.style.display='block'}else{badgeEl.style.display='none'}
+document.getElementById('main-img').src = p.img;
+const thumbBtns = document.querySelectorAll('#thumbs button');
+const thumbImgs = thumbBtns[0]&&thumbBtns[0].querySelector('img');
+if(thumbBtns[0]) thumbBtns[0].onclick = ()=>setImg(thumbBtns[0],p.img);
+if(thumbBtns[0]&&thumbBtns[0].querySelector('img')) thumbBtns[0].querySelector('img').src=p.t1;
+if(thumbBtns[1]&&thumbBtns[1].querySelector('img')){
+  thumbBtns[1].onclick=()=>setImg(thumbBtns[1],p.img.replace(p.img.split('?')[0],p.t2.split('?')[0])||p.img);
+  thumbBtns[1].querySelector('img').src=p.t2;
+}
+if(thumbBtns[2]&&thumbBtns[2].querySelector('img')){
+  thumbBtns[2].onclick=()=>setImg(thumbBtns[2],p.img.replace(p.img.split('?')[0],p.t3.split('?')[0])||p.img);
+  thumbBtns[2].querySelector('img').src=p.t3;
+}
+
+function setImg(btn, src){
+  document.getElementById('main-img').src=src;
+  document.querySelectorAll('#thumbs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function selectColor(el, name){
+  document.querySelectorAll('.swatch').forEach(s=>{s.style.borderColor='transparent'});
+  el.style.borderColor='var(--sil)';
+  document.getElementById('color-name').textContent=name;
+}
+function selectSize(btn){
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function changeQty(d){
+  const i=document.getElementById('qty');
+  i.value=Math.max(1,Math.min(10,(+i.value)+d));
+}
+function openTab(btn, id){
+  document.querySelectorAll('.tab-hdr').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+function addToCart(){
+  const qty=+document.getElementById('qty').value;
+  for(let i=0;i<qty;i++) cart.push({name:p.title,price:p.price,qty:1});
+  localStorage.setItem('icu-cart',JSON.stringify(cart));
+  updateCartUI();
+  const btn=document.getElementById('add-btn'),orig=btn.textContent;
+  btn.textContent='✓ Added to Cart';btn.style.background='linear-gradient(135deg,#4CAF50,#388E3C)';btn.style.color='#fff';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';btn.style.color=''},1800);
+}
+</script>
+</body>
+</html>

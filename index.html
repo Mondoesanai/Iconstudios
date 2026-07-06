@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icon Studios Universal — Inspiring Artists to Live Their Dreams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.youtube.com/iframe_api"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080808;--surf:#0f0f0f;--bdr:rgba(255,255,255,0.08);
+    --sil:#B8C0CC;--sil-l:#DDE2EA;--sil-d:#7A8090;
+    --gold:#C9A96E;--text:#F2F0F2;--muted:#5A5A5A;
+    --nav-h:68px;--mw:1280px;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    height:var(--nav-h);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 48px;
+    transition:background .4s ease,border-color .4s ease;
+    border-bottom:1px solid transparent;
+    /* subtle glass always present over video */
+    background:rgba(8,8,8,.22);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+  }
+  nav.scrolled{background:rgba(8,8,8,.96);border-bottom-color:var(--bdr)}
+
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;letter-spacing:.1em;color:#fff;text-decoration:none;white-space:nowrap}
+  .nav-logo em{font-style:normal;background:linear-gradient(120deg,#C0C6D0,#EEF0F4,#9EA6B2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;padding-bottom:2px;border-bottom:1px solid transparent}
+  .nav-links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.3)}
+
+  .nav-right{display:flex;align-items:center;gap:20px}
+  .nav-icon{color:rgba(255,255,255,.65);text-decoration:none;display:flex;align-items:center;transition:color .2s}
+  .nav-icon:hover{color:#fff}
+  .nav-cart{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+  .nav-cart:hover{color:#fff}
+  .cart-dot{background:var(--gold);color:#000;font-size:8px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .nav-sep{width:1px;height:20px;background:rgba(255,255,255,.15)}
+
+  /* ── HERO ── */
+  .hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+  .hero-video{position:absolute;inset:0;overflow:hidden;background:#000}
+  .hero-video::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18) 0%,rgba(0,0,0,.04) 30%,rgba(8,8,8,.88) 100%)}
+  .hero-video iframe{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:100vw;height:56.25vw;
+    min-height:100vh;min-width:177.78vh;
+    pointer-events:none;border:none;
+  }
+
+  /* Bottom-left hero action buttons */
+  .hero-btns{position:absolute;bottom:80px;left:64px;z-index:2;display:flex;gap:14px;align-items:center}
+  .btn-hero-gold{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#050505;background:var(--gold);padding:15px 34px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 28px rgba(201,169,110,.35)}
+  .btn-hero-gold:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,169,110,.45)}
+  .btn-hero-outline{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.3);padding:15px 34px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:border-color .2s,color .2s,background .2s;background:rgba(0,0,0,.25);backdrop-filter:blur(10px)}
+  .btn-hero-outline:hover{border-color:rgba(255,255,255,.6);color:#fff;background:rgba(0,0,0,.4)}
+
+  /* Sound toggle */
+  .hero-sound{position:absolute;bottom:80px;right:48px;z-index:3;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.35);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:11px 18px;cursor:pointer;font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:background .2s,color .2s,border-color .2s}
+  .hero-sound:hover{background:rgba(0,0,0,.6);color:#fff;border-color:rgba(255,255,255,.3)}
+
+  .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.65;z-index:2}
+
+  /* Lightbox */
+  .lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.94);align-items:center;justify-content:center}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:82vw;max-height:86vh;object-fit:contain;animation:lb-in .28s cubic-bezier(.22,.61,.36,1);cursor:default}
+  @keyframes lb-in{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+  .lb-close{position:absolute;top:20px;right:28px;background:none;border:none;color:rgba(255,255,255,.55);font-size:38px;cursor:pointer;line-height:1;font-weight:200;transition:color .2s;z-index:2}
+  .lb-close:hover{color:#fff}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.65);font-size:42px;line-height:1;cursor:pointer;width:56px;height:56px;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;z-index:2}
+  .lb-nav:hover{background:rgba(0,0,0,.7);color:#fff}
+  .lb-prev{left:24px}
+  .lb-next{right:24px}
+  .lb-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.22em;color:rgba(255,255,255,.38);font-family:'Inter',sans-serif}
+  .scroll-hint span{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:#fff}
+  .scroll-track{width:1px;height:36px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);animation:drop 2s ease-in-out infinite}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{transform:scaleY(1);transform-origin:top;opacity:1}80%{transform:scaleY(1);transform-origin:bottom;opacity:1}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
+
+  /* ── IMAGE STRIP ── */
+  .img-strip{display:grid;grid-template-columns:repeat(7,1fr);height:280px;gap:2px}
+  .img-strip a{overflow:hidden;display:block}
+  .img-strip img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8) grayscale(10%);transition:filter .4s,transform .5s}
+  .img-strip a:hover img{filter:brightness(.95) grayscale(0%);transform:scale(1.05)}
+
+  /* ── ABOUT ── */
+  .about{padding:80px 48px;max-width:var(--mw);margin:0 auto;border-bottom:1px solid var(--bdr)}
+  .about-top{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--bdr)}
+  .about-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .about-label::before{content:'';width:32px;height:1px;background:var(--gold);opacity:.5}
+  .about-h{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,76px);font-weight:300;line-height:1.0;letter-spacing:-.01em}
+  .about-h em{font-style:italic;color:var(--sil-d)}
+  .about-right{display:flex;flex-direction:column;justify-content:flex-end}
+  .about-quote{font-size:13.5px;color:var(--muted);line-height:1.9;padding-left:20px;border-left:2px solid rgba(255,255,255,.08);margin-bottom:24px}
+  .about-links{display:flex;gap:12px}
+  .btn-sm{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--sil);border:1px solid var(--bdr);padding:11px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
+  .btn-sm:hover{border-color:rgba(184,192,204,.35);color:var(--sil-l)}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat-col{padding-left:28px;border-left:1px solid var(--bdr)}
+  .stat-col:first-child{padding-left:0;border-left:none}
+  .stat-n{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,4.5vw,68px);font-weight:300;background:linear-gradient(135deg,#C0C6D0,#EEF0F4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
+  .stat-l{font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-top:8px}
+
+  /* ── VIDEO ── */
+  .reel{background:var(--surf);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:80px 48px}
+  .reel-inner{max-width:var(--mw);margin:0 auto}
+  .reel-head{text-align:center;margin-bottom:44px}
+  .reel-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .reel-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);font-weight:400}
+  .reel-title em{font-style:italic;color:var(--sil-d)}
+  .reel-frame{position:relative;aspect-ratio:16/9;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px var(--bdr)}
+  .reel-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+  /* ── CTA BAND ── */
+  .cta-band{text-align:center;padding:100px 48px;background:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(201,169,110,.06) 0%,transparent 65%)}
+  .cta-inner{max-width:520px;margin:0 auto}
+  .cta-label{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:400;margin-bottom:18px}
+  .cta-h em{font-style:italic;color:var(--sil-d)}
+  .cta-p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:40px}
+  .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-gold{font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#050505;background:linear-gradient(135deg,#D4B070,#C9A96E,#B8923E);padding:14px 36px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(201,169,110,.2)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(201,169,110,.3)}
+
+  /* ── FOOTER ── */
+  footer{background:var(--surf);border-top:1px solid var(--bdr);padding:60px 48px 36px}
+  .foot-grid{max-width:var(--mw);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+  .foot-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;letter-spacing:.08em;background:linear-gradient(120deg,#C0C6D0,#EEF0F4,#A8AEB8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+  .foot-desc{font-size:12px;color:var(--muted);line-height:1.7;max-width:240px;margin-bottom:20px}
+  .foot-social{display:flex;gap:14px}
+  .foot-social a{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+  .foot-social a:hover{color:var(--sil)}
+  .foot-col-h{font-size:8.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--sil-d);margin-bottom:18px}
+  .foot-links{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .foot-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .foot-links a:hover{color:var(--sil)}
+  .foot-bottom{max-width:var(--mw);margin:44px auto 0;padding-top:20px;border-top:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center}
+  .foot-copy{font-size:10.5px;color:var(--muted)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1024px){.about{grid-template-columns:1fr;gap:48px}.foot-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){nav{padding:0 24px}.nav-links{display:none}.img-strip{grid-template-columns:repeat(4,1fr);height:200px}.about,.reel,.cta-band{padding:60px 24px}.foot-grid{grid-template-columns:1fr;gap:32px}.foot-bottom{flex-direction:column;gap:8px;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><em>Icon Studios</em> Universal</a>
+  <ul class="nav-links">
+    <li><a href="clients.html">Clients</a></li>
+    <li><a href="talent.html">Talent</a></li>
+    <li><a href="ourteam.html">Our Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="merch.html">Merch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO — Earth from space video background -->
+<section class="hero">
+  <div class="hero-video">
+    <!-- NASA / ISS 4K Earth timelapse — cinematic space view of the world rotating -->
+    <iframe id="hero-iframe"
+      src="https://www.youtube.com/embed/bCOO8bp5RaI?autoplay=1&mute=1&loop=1&playlist=bCOO8bp5RaI&controls=0&disablekb=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&enablejsapi=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="hero-btns">
+    <a href="talent.html" class="btn-hero-gold">View Talent</a>
+    <a href="contact.html" class="btn-hero-outline">Submit Your Talent</a>
+  </div>
+  <button id="sound-btn" class="hero-sound" onclick="toggleHeroSound()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    <span>Unmute</span>
+  </button>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-track"></div>
+  </div>
+</section>
+
+<!-- REAL IMAGE STRIP from Icon Studios Universal -->
+<div class="img-strip">
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/4e649bc7-d1c4-47d8-9714-eeaef939d8a7/homepage2.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/dcbfcf52-0561-47de-acf5-86101b3c35de/homepage1.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/7ec19e7e-5c10-4344-a696-1ea96d8a50e7/homepage3.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/76f74dd7-78b4-4254-b6d3-2bb08be1e5b4/homepage4.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/6594b3d0-840d-4fc9-9dea-6f9d7ad40f69/homepage5.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/ccaa668e-a810-4556-b5f8-ba2b4aacde59/homepage6.png" alt="Client work" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/9dd8f587-1b85-40f6-b333-c253f3bd5e24/homepage7.png" alt="Client work" loading="lazy"></a>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+  <div class="about-top">
+    <div>
+      <p class="about-label">About the Agency</p>
+      <h2 class="about-h">Where <em>talent</em><br>finds its stage.</h2>
+    </div>
+    <div class="about-right">
+      <p class="about-quote">A premier talent management company trusted by network television, film producers, casting directors, and Fortune 500 companies worldwide — locally, nationally, and internationally.</p>
+      <div class="about-links">
+        <a href="ourteam.html" class="btn-sm">Meet Our Team</a>
+        <a href="contact.html" class="btn-sm">Work With Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-col"><span class="stat-n">14+</span><span class="stat-l">Years in Business</span></div>
+    <div class="stat-col"><span class="stat-n">100+</span><span class="stat-l">Talents Represented</span></div>
+    <div class="stat-col"><span class="stat-n">10</span><span class="stat-l">Talent Categories</span></div>
+    <div class="stat-col"><span class="stat-n">4</span><span class="stat-l">Major Markets</span></div>
+  </div>
+</div>
+
+<!-- SECOND IMAGE ROW -->
+<div class="img-strip" style="height:220px;">
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/9223b82d-b644-45ea-b7c5-7985f249ed00/homepage9.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/1c992f11-081b-48fd-bbb1-22a305ee527b/homepage8.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/3aa0859d-646a-468c-bac2-dc0e3bfc6875/homepage10.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/61321ac0-6c9c-477a-a251-098079a9e867/homepage11.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/8b0f2975-7205-4bb4-ae95-e3c4f8710025/homepage12.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/ddab1d73-ccc7-4387-9f65-faa37210b48e/homepage13.png" alt="" loading="lazy"></a>
+  <a href="clients.html"><img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/c3c4be1e-5a12-42f1-8179-85a48fbf9afc/homepage14.png" alt="" loading="lazy"></a>
+</div>
+
+<!-- DEMO REEL -->
+<div class="reel">
+  <div class="reel-inner">
+    <div class="reel-head">
+      <p class="reel-label">Demo Reel</p>
+      <h2 class="reel-title">Icon Studios Universal &nbsp;<em>2022</em></h2>
+    </div>
+    <div class="reel-frame">
+      <iframe
+        src="https://www.youtube.com/embed/bCOO8bp5RaI?rel=0&modestbranding=1&color=white"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <p class="cta-label">Join the Roster</p>
+    <h2 class="cta-h">Ready to Live<br><em>Your Dream?</em></h2>
+    <p class="cta-p">From first-time performers to seasoned professionals — Icon Studios Universal has the connections to elevate your career to the next level.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-gold">Submit Your Talent</a>
+      <a href="talent.html" class="btn-sm" style="color:var(--sil-d);">Browse Roster →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">Icon Studios Universal</div>
+      <p class="foot-desc">"Inspiring Artists to Live their Dreams." Talent management, casting, and production across DFW and beyond.</p>
+      <div class="foot-social">
+        <a href="https://instagram.com/iconstudiosuniversal" target="_blank">Instagram</a>
+        <a href="mailto:icon@iconstudiosdallas.com">Email</a>
+      </div>
+    </div>
+    <div>
+      <p class="foot-col-h">Navigate</p>
+      <ul class="foot-links">
+        <li><a href="clients.html">Clients</a></li>
+        <li><a href="talent.html">Talent</a></li>
+        <li><a href="ourteam.html">Our Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="merch.html">Merchandise</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-h">Talent</p>
+      <ul class="foot-links">
+        <li><a href="talent.html">Men</a></li>
+        <li><a href="talent.html">Women</a></li>
+        <li><a href="talent.html">Teens</a></li>
+        <li><a href="talent.html">Kids</a></li>
+        <li><a href="talent.html">Specialty</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot-col-h">Contact</p>
+      <ul class="foot-links">
+        <li><a href="mailto:icon@iconstudiosdallas.com">icon@iconstudiosdallas.com</a></li>
+        <li><a href="mailto:IconStudiosCasting@gmail.com">Talent Submissions</a></li>
+        <li><a href="contact.html">Plano, TX 75024</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p class="foot-copy">© 2025 Icon Studios Universal. All rights reserved.</p>
+    <p class="foot-copy">Dallas · Los Angeles · Atlanta · New York</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="lbBgClick(event)">
+  <button class="lb-close" onclick="closeLightbox()" title="Close">&#215;</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1);event.stopPropagation()" title="Previous">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbNav(1);event.stopPropagation()" title="Next">&#8250;</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+// YouTube IFrame API
+var ytPlayer, soundOn = false;
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('hero-iframe', {
+    events: { onReady: function(e) { e.target.mute(); } }
+  });
+}
+
+function updateSoundBtn() {
+  const btn = document.getElementById('sound-btn');
+  if (!btn) return;
+  btn.innerHTML = soundOn
+    ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg><span>Mute</span>'
+    : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><span>Unmute</span>';
+}
+
+function toggleHeroSound() {
+  if (!ytPlayer || !ytPlayer.mute) return;
+  soundOn = !soundOn;
+  soundOn ? (ytPlayer.unMute(), ytPlayer.setVolume(85)) : ytPlayer.mute();
+  updateSoundBtn();
+}
+
+// Lightbox with prev/next
+let lbImages = [], lbIdx = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const strips = document.querySelectorAll('.img-strip a');
+  lbImages = Array.from(strips).map(a => a.querySelector('img').src);
+  strips.forEach((a, i) => {
+    a.addEventListener('click', e => { e.preventDefault(); lbIdx = i; lbShow(); });
+  });
+});
+
+function lbShow() {
+  const src = lbImages[lbIdx].replace(/w=\d+/, 'w=1800').replace(/h=\d+/, 'h=1200');
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-counter').textContent = (lbIdx+1) + ' / ' + lbImages.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
+  lbShow();
+}
+
+function lbBgClick(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+</script>
+</body>
+</html>

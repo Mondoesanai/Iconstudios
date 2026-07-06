@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — Icon Studios Universal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080808;--surf:#0f0f0f;--bdr:rgba(255,255,255,0.08);
+    --sil:#B8C0CC;--sil-l:#DDE2EA;--sil-d:#7A8090;
+    --gold:#C9A96E;--text:#F2F0F2;--muted:#5A5A5A;
+    --nav-h:68px;--mw:1100px;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+  nav{position:sticky;top:0;z-index:200;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;letter-spacing:.1em;color:#fff;text-decoration:none;white-space:nowrap}
+  .nav-logo em{font-style:normal;background:linear-gradient(120deg,#C0C6D0,#EEF0F4,#9EA6B2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s;padding-bottom:2px;border-bottom:1px solid transparent}
+  .nav-links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.3)}
+  .nav-links a.active{color:#fff}
+
+  /* PAGE HEADER */
+  .page-header{padding:100px 48px 72px;border-bottom:1px solid var(--bdr);text-align:center}
+  .page-header p.label{font-size:9px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .page-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,90px);font-weight:400;letter-spacing:.02em;line-height:1;margin-bottom:22px}
+  .page-header h1 em{font-style:italic;color:var(--sil-d)}
+  .page-header p.sub{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto;line-height:1.8}
+
+  /* TEAM SECTION */
+  .team-section{max-width:var(--mw);margin:0 auto;padding:80px 48px 64px}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+
+  .team-card{background:var(--surf);overflow:hidden;position:relative;cursor:pointer;display:block;text-decoration:none;color:inherit}
+  .team-card-img{position:relative;overflow:hidden;aspect-ratio:3/4}
+  .team-card-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.75) grayscale(15%);transition:filter .5s,transform .5s}
+  .team-card:hover .team-card-img img{filter:brightness(.9) grayscale(0%);transform:scale(1.03)}
+  .team-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.2) 45%,transparent 70%)}
+  .team-card-info{position:absolute;bottom:0;left:0;right:0;padding:32px 28px;z-index:2}
+  .team-card-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;letter-spacing:.02em;line-height:1.1;margin-bottom:6px}
+  .team-card-role{font-size:9px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .view-bio{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#050505;background:var(--gold);padding:10px 18px;transition:background .2s,transform .2s}
+  .team-card:hover .view-bio{background:#D4B070;transform:translateY(-1px)}
+  .view-bio svg{transition:transform .2s}
+  .team-card:hover .view-bio svg{transform:translateX(3px)}
+
+  /* INDIVIDUAL BIO SECTIONS */
+  .bio-sections{border-top:1px solid var(--bdr)}
+  .bio-section{display:none;max-width:var(--mw);margin:0 auto;padding:72px 48px;border-bottom:1px solid var(--bdr)}
+  .bio-section.active{display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:start}
+  .bio-section-img{position:relative;overflow:hidden}
+  .bio-section-img img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:brightness(.85)}
+  .bio-section-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.4) 100%)}
+  .bio-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .bio-name{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,5vw,64px);font-weight:400;letter-spacing:.01em;line-height:1}
+  .bio-role{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;margin-top:10px}
+  .bio-divider{width:36px;height:1px;background:var(--gold);opacity:.5;margin-bottom:28px}
+  .bio-text{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:18px}
+  .bio-text strong{color:var(--sil);font-weight:500}
+  .bio-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;margin-top:24px}
+  .bio-tag{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sil-d);border:1px solid var(--bdr);padding:6px 14px}
+  .bio-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .bio-btn{font-size:9.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:12px 24px;border:1px solid var(--bdr);color:var(--sil-d);transition:color .2s,border-color .2s;display:inline-flex;align-items:center;gap:7px}
+  .bio-btn:hover{color:var(--sil);border-color:rgba(184,192,204,.3)}
+  .bio-btn.primary{background:linear-gradient(135deg,#C0C6D0,#EEF0F4);color:#080808;border-color:transparent}
+  .bio-btn.primary:hover{box-shadow:0 6px 24px rgba(200,205,214,.18)}
+
+  /* VALUES */
+  .values-section{border-top:1px solid var(--bdr);padding:80px 48px}
+  .values-inner{max-width:var(--mw);margin:0 auto;text-align:center}
+  .values-label{font-size:9px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .values-h{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:400;margin-bottom:56px}
+  .values-h em{font-style:italic;color:var(--sil-d)}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;text-align:left}
+  .value-card{background:var(--surf);padding:40px 32px}
+  .value-n{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;line-height:1;background:linear-gradient(135deg,#C0C6D0,#EEF0F4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+  .value-h{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sil-d);margin-bottom:10px}
+  .value-p{font-size:12px;color:var(--muted);line-height:1.8}
+
+  /* CTA */
+  .team-cta{text-align:center;padding:80px 48px;border-top:1px solid var(--bdr);background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(201,169,110,.05) 0%,transparent 65%)}
+  .team-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:400;margin-bottom:16px}
+  .team-cta h2 em{font-style:italic;color:var(--sil-d)}
+  .team-cta p{font-size:13px;color:var(--muted);margin-bottom:36px}
+  .btn-cta{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#080808;background:linear-gradient(135deg,#C0C6D0,#EEF0F4);padding:14px 40px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s}
+  .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(200,205,214,.2)}
+
+  footer{background:var(--surf);border-top:1px solid var(--bdr);padding:40px 48px 24px}
+  .foot-inner{max-width:var(--mw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  .foot-logo{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;letter-spacing:.08em;background:linear-gradient(120deg,#C0C6D0,#EEF0F4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a{font-size:10.5px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .foot-links a:hover{color:var(--sil)}
+  .foot-copy{text-align:center;margin:18px auto 0;padding-top:18px;border-top:1px solid var(--bdr);font-size:10px;color:var(--muted);max-width:var(--mw)}
+
+  @media(max-width:900px){.team-grid,.values-grid{grid-template-columns:1fr}.bio-section.active{grid-template-columns:1fr;gap:32px}}
+  @media(max-width:768px){nav{padding:0 24px}.nav-links{display:none}.page-header,.team-section,.values-section,.team-cta,.bio-section{padding-left:24px;padding-right:24px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><em>Icon Studios</em> Universal</a>
+  <ul class="nav-links">
+    <li><a href="clients.html">Clients</a></li>
+    <li><a href="talent.html">Talent</a></li>
+    <li><a href="ourteam.html" class="active">Our Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="merch.html">Merch</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="label">Behind the Agency</p>
+  <h1>Our <em>Team</em></h1>
+  <p class="sub">The people dedicated to connecting extraordinary talent with extraordinary opportunities.</p>
+</div>
+
+<div class="team-section">
+  <div class="team-grid">
+
+    <a class="team-card" href="#bio-normita" onclick="openBio(event,'normita')">
+      <div class="team-card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/13bcb315-476a-4517-82d4-e4910d3918a5/0586_NormitaJoven_JrnieJade_01_25_22T.jpg" alt="Normita Joven">
+      </div>
+      <div class="team-card-info">
+        <p class="team-card-name">Normita Joven</p>
+        <p class="team-card-role">Founder &amp; Director</p>
+        <span class="view-bio">
+          View Full Bio
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="team-card" href="#bio-nick" onclick="openBio(event,'nick')">
+      <div class="team-card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/ab35b96a-5075-4bbc-8522-628a3ead45b4/Screen+Shot+2022-03-18+at+9.53.32+AM.png" alt="Nick Callaway">
+      </div>
+      <div class="team-card-info">
+        <p class="team-card-name">Nick Callaway</p>
+        <p class="team-card-role">Talent Agent</p>
+        <span class="view-bio">
+          View Full Bio
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="team-card" href="#bio-chanel" onclick="openBio(event,'chanel')">
+      <div class="team-card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/b99501e8-854e-4fd7-b6ee-dcb58cdae6c5/5B1CD2D7-E0A2-4EF9-A52F-0E222E8350ED.jpg" alt="Chanel Bracy">
+      </div>
+      <div class="team-card-info">
+        <p class="team-card-name">Chanel Bracy</p>
+        <p class="team-card-role">Women's Division Lead</p>
+        <span class="view-bio">
+          View Full Bio
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- BIO DETAIL SECTIONS -->
+<div class="bio-sections">
+
+  <div class="bio-section" id="bio-normita">
+    <div class="bio-section-img">
+      <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/13bcb315-476a-4517-82d4-e4910d3918a5/0586_NormitaJoven_JrnieJade_01_25_22T.jpg" alt="Normita Joven">
+    </div>
+    <div>
+      <p style="font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Founder &amp; Director</p>
+      <h2 class="bio-name">Normita<br>Joven</h2>
+      <p class="bio-role">Icon Studios Universal</p>
+      <div class="bio-divider"></div>
+      <p class="bio-text">Normita Joven is the visionary founder and director of Icon Studios Universal, one of the most respected talent agencies in the Dallas–Fort Worth area. With over <strong>14 years in the talent and entertainment industry</strong>, she has built an agency rooted in authenticity, genuine relationships, and an unwavering commitment to helping artists live their dreams.</p>
+      <p class="bio-text">Under her leadership, Icon Studios Universal has placed talent in <strong>film, television, commercials, print campaigns, billboards, fashion shows, and corporate events</strong> — from local DFW productions to nationally recognized Fortune 500 campaigns.</p>
+      <p class="bio-text">Normita's philosophy is simple: every talent deserves to be seen, heard, and placed in rooms where their gifts can shine. That belief has defined ICU's culture from day one.</p>
+      <div class="bio-tags">
+        <span class="bio-tag">14+ Years</span>
+        <span class="bio-tag">DFW · LA · ATL · NY</span>
+        <span class="bio-tag">Film &amp; TV</span>
+        <span class="bio-tag">Founder</span>
+      </div>
+      <div class="bio-actions">
+        <a href="mailto:icon@iconstudiosdallas.com" class="bio-btn primary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Normita
+        </a>
+        <button class="bio-btn" onclick="closeBio()">Close ×</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bio-section" id="bio-nick">
+    <div class="bio-section-img">
+      <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/ab35b96a-5075-4bbc-8522-628a3ead45b4/Screen+Shot+2022-03-18+at+9.53.32+AM.png" alt="Nick Callaway">
+    </div>
+    <div>
+      <p style="font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Talent Agent</p>
+      <h2 class="bio-name">Nick<br>Callaway</h2>
+      <p class="bio-role">Men's &amp; Specialty Division</p>
+      <div class="bio-divider"></div>
+      <p class="bio-text">Nick Callaway manages Icon Studios Universal's men's and specialty talent roster, bringing a strategic and relationship-driven approach to talent placement. His extensive network spans <strong>casting directors, production houses, commercial brands, and independent filmmakers</strong> across Texas and nationwide.</p>
+      <p class="bio-text">Nick's talent for identifying potential and pairing it with the right opportunity has resulted in <strong>dozens of successful placements</strong> in leading national commercial campaigns, film and television roles, and high-profile print editorial work.</p>
+      <p class="bio-text">His background in talent development means he understands the full arc of a career — and brings that long-view perspective to every artist he represents.</p>
+      <div class="bio-tags">
+        <span class="bio-tag">Men's Division</span>
+        <span class="bio-tag">Specialty Talent</span>
+        <span class="bio-tag">Commercial</span>
+        <span class="bio-tag">Film &amp; Print</span>
+      </div>
+      <div class="bio-actions">
+        <a href="mailto:IconStudiosCasting@gmail.com" class="bio-btn primary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Nick
+        </a>
+        <button class="bio-btn" onclick="closeBio()">Close ×</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bio-section" id="bio-chanel">
+    <div class="bio-section-img">
+      <img src="https://images.squarespace-cdn.com/content/v1/6233aa122f434d100a3bd0e0/b99501e8-854e-4fd7-b6ee-dcb58cdae6c5/5B1CD2D7-E0A2-4EF9-A52F-0E222E8350ED.jpg" alt="Chanel Bracy">
+    </div>
+    <div>
+      <p style="font-size:9px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Women's Division Lead</p>
+      <h2 class="bio-name">Chanel<br>Bracy</h2>
+      <p class="bio-role">Women's, Teens &amp; Kids Division</p>
+      <div class="bio-divider"></div>
+      <p class="bio-text">Chanel Bracy leads Icon Studios Universal's women's, teen, and kids divisions with a hands-on, <strong>people-first approach</strong> to talent development and career guidance. Her sharp eye for emerging talent has launched the careers of numerous artists across modeling, acting, and commercial work.</p>
+      <p class="bio-text">Chanel's strength lies in the way she <strong>connects with talent personally</strong> — understanding their goals, strengths, and aspirations before matching them with the opportunities that will move them forward. Her approach has resulted in a high rate of repeat bookings and long-term client relationships.</p>
+      <p class="bio-text">She brings warmth, professionalism, and a deep passion for the industry to everything she does at ICU.</p>
+      <div class="bio-tags">
+        <span class="bio-tag">Women's Division</span>
+        <span class="bio-tag">Teens &amp; Kids</span>
+        <span class="bio-tag">Modeling</span>
+        <span class="bio-tag">Acting</span>
+      </div>
+      <div class="bio-actions">
+        <a href="mailto:icon@iconstudiosdallas.com" class="bio-btn primary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Chanel
+        </a>
+        <button class="bio-btn" onclick="closeBio()">Close ×</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- VALUES -->
+<div class="values-section">
+  <div class="values-inner">
+    <p class="values-label">What We Stand For</p>
+    <h2 class="values-h">Built on three <em>pillars</em></h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-n">01</div>
+        <h3 class="value-h">Authentic Relationships</h3>
+        <p class="value-p">We don't just place talent — we invest in careers. Every artist on our roster is treated as a partner, not a transaction.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-n">02</div>
+        <h3 class="value-h">Industry Access</h3>
+        <p class="value-p">14 years of relationships with casting directors, Fortune 500 brands, and major studios means our talent gets in rooms others can't reach.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-n">03</div>
+        <h3 class="value-h">Dream Realization</h3>
+        <p class="value-p">Our mission is simple: Inspiring Artists to Live Their Dreams. Every decision we make is filtered through that lens.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="team-cta">
+  <h2>Ready to Join <em>Our Roster?</em></h2>
+  <p>Submit your portfolio and we'll be in touch.</p>
+  <a href="contact.html" class="btn-cta">
+    Submit Your Talent
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">Icon Studios Universal</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="clients.html">Clients</a>
+      <a href="talent.html">Talent</a>
+      <a href="contact.html">Contact</a>
+      <a href="merch.html">Merch</a>
+    </div>
+  </div>
+  <p class="foot-copy">© 2025 Icon Studios Universal · Plano, TX · Inspiring Artists to Live Their Dreams</p>
+</footer>
+<script>
+function openBio(e, id){
+  e.preventDefault();
+  // Hide all sections
+  document.querySelectorAll('.bio-section').forEach(s=>s.classList.remove('active'));
+  const target = document.getElementById('bio-'+id);
+  if(target){
+    target.classList.add('active');
+    // Smooth scroll to the section
+    setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'start'}),50);
+  }
+}
+function closeBio(){
+  document.querySelectorAll('.bio-section').forEach(s=>s.classList.remove('active'));
+  document.querySelector('.team-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

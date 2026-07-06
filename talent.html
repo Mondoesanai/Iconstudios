@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Roster — Icon Studios Universal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080808;--surf:#0f0f0f;--bdr:rgba(255,255,255,0.08);
+    --sil:#B8C0CC;--sil-l:#DDE2EA;--sil-d:#7A8090;
+    --gold:#C9A96E;--text:#F2F0F2;--muted:#5A5A5A;
+    --nav-h:68px;--mw:1340px;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:200;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;letter-spacing:.1em;color:#fff;text-decoration:none;white-space:nowrap}
+  .nav-logo em{font-style:normal;background:linear-gradient(120deg,#C0C6D0,#EEF0F4,#9EA6B2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s;padding-bottom:2px;border-bottom:1px solid transparent}
+  .nav-links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.3)}
+  .nav-links a.active{color:#fff}
+
+  /* PAGE HEADER */
+  .page-header{padding:80px 48px 56px;border-bottom:1px solid var(--bdr)}
+  .page-header-inner{max-width:var(--mw);margin:0 auto}
+  .header-label{font-size:9px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .header-h{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,80px);font-weight:400;letter-spacing:.02em;line-height:1;margin-bottom:20px}
+  .header-h em{font-style:italic;color:var(--sil-d)}
+  .header-p{font-size:13px;color:var(--muted);max-width:460px;line-height:1.8}
+
+  /* SEARCH BAR */
+  .search-section{max-width:var(--mw);margin:0 auto;padding:36px 48px 32px}
+  .search-wrap{position:relative;max-width:600px}
+  .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--sil-d);pointer-events:none}
+  .search-input{width:100%;background:var(--surf);border:1px solid var(--bdr);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;padding:16px 18px 16px 50px;outline:none;transition:border-color .25s;letter-spacing:.01em}
+  .search-input::placeholder{color:var(--muted)}
+  .search-input:focus{border-color:rgba(184,192,204,.3)}
+  .search-clear{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--sil-d);cursor:pointer;font-size:18px;display:none;transition:color .2s}
+  .search-clear:hover{color:var(--text)}
+  .search-meta{margin-top:10px;font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+  /* CATEGORY PILLS */
+  .cat-row{max-width:var(--mw);margin:0 auto;padding:0 48px 32px;display:flex;gap:8px;flex-wrap:wrap}
+  .cat-pill{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--sil-d);background:none;border:1px solid var(--bdr);padding:8px 18px;cursor:pointer;font-family:'Inter',sans-serif;transition:color .2s,border-color .2s,background .2s}
+  .cat-pill:hover{color:var(--text);border-color:rgba(184,192,204,.25)}
+  .cat-pill.active{color:var(--text);border-color:var(--sil);background:rgba(184,192,204,.06)}
+
+  /* TALENT GRID */
+  .talent-main{max-width:var(--mw);margin:0 auto;padding:0 48px 80px}
+  .talent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+  .talent-card{background:var(--surf);display:block;text-decoration:none;color:var(--text);position:relative;overflow:hidden}
+  .talent-card:hover .tc-img img{transform:scale(1.05)}
+  .talent-card:hover .tc-overlay{opacity:1}
+  .tc-img{position:relative;overflow:hidden;aspect-ratio:3/4}
+  .tc-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8) grayscale(12%);transition:transform .5s ease,filter .4s}
+  .talent-card:hover .tc-img img{filter:brightness(.88) grayscale(0%)}
+  .tc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%);opacity:.6;transition:opacity .3s}
+  .tc-info{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:2}
+  .tc-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;letter-spacing:.02em;line-height:1.15;margin-bottom:4px}
+  .tc-cat{font-size:8.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+  /* TALENT BIO MODAL — compact card popup */
+  .talent-modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
+  .talent-modal.open{display:flex}
+  .tm-inner{background:var(--surf);border:1px solid rgba(255,255,255,.1);width:380px;max-height:90vh;overflow-y:auto;position:relative;animation:tm-in .25s cubic-bezier(.22,.61,.36,1)}
+  @keyframes tm-in{from{opacity:0;transform:scale(.94) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+  .tm-img{position:relative;overflow:hidden;aspect-ratio:3/4}
+  .tm-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .tm-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 50%)}
+  .tm-img-info{position:absolute;bottom:0;left:0;right:0;padding:20px}
+  .tm-cat{font-size:8.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .tm-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;line-height:1.1;letter-spacing:.01em;color:#fff}
+  .tm-body{padding:20px 20px 24px}
+  .tm-bio{font-size:12.5px;color:var(--muted);line-height:1.8;margin-bottom:16px}
+  .tm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .tm-tag{font-size:8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--sil-d);border:1px solid var(--bdr);padding:4px 10px}
+  .tm-actions{display:flex;gap:8px}
+  .tm-btn{font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:11px 18px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:none;font-family:'Inter',sans-serif;flex:1;justify-content:center}
+  .tm-btn.gold{background:var(--gold);color:#050505}
+  .tm-btn.gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,169,110,.3)}
+  .tm-btn.ghost{background:rgba(255,255,255,.05);color:var(--sil-d);border:1px solid var(--bdr)}
+  .tm-btn.ghost:hover{color:var(--sil);background:rgba(255,255,255,.09)}
+  .tm-close{position:absolute;top:12px;right:14px;background:rgba(0,0,0,.45);border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;line-height:1;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s,color .2s;z-index:2}
+  .tm-close:hover{background:rgba(0,0,0,.8);color:#fff}
+
+  /* NO RESULTS */
+  .no-results{display:none;padding:80px 0;text-align:center}
+  .no-results h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--sil-d);margin-bottom:10px}
+  .no-results p{font-size:13px;color:var(--muted)}
+
+  /* FOOTER */
+  footer{background:var(--surf);border-top:1px solid var(--bdr);padding:44px 48px 28px}
+  .foot-inner{max-width:var(--mw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+  .foot-logo{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;letter-spacing:.08em;background:linear-gradient(120deg,#C0C6D0,#EEF0F4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .foot-links{display:flex;gap:22px}
+  .foot-links a{font-size:10.5px;color:var(--muted);text-decoration:none;transition:color .2s}
+  .foot-links a:hover{color:var(--sil)}
+  .foot-copy{font-size:10px;color:var(--muted);margin-top:18px;text-align:center;padding-top:18px;border-top:1px solid var(--bdr)}
+
+  @media(max-width:1100px){.talent-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:768px){nav{padding:0 24px}.nav-links{display:none}.page-header,.search-section,.cat-row,.talent-main{padding-left:20px;padding-right:20px}.talent-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.talent-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><em>Icon Studios</em> Universal</a>
+  <ul class="nav-links">
+    <li><a href="clients.html">Clients</a></li>
+    <li><a href="talent.html" class="active">Talent</a></li>
+    <li><a href="ourteam.html">Our Team</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="merch.html">Merch</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="header-label">Our Roster</p>
+    <h1 class="header-h">The <em>Talent</em></h1>
+    <p class="header-p">Search our full roster of represented talent across men, women, teens, kids, and specialty categories.</p>
+  </div>
+</div>
+
+<div class="search-section">
+  <div class="search-wrap">
+    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search-input" id="search" placeholder="Search talent by name…" oninput="handleSearch(this.value)" autocomplete="off">
+    <button class="search-clear" id="clear-btn" onclick="clearSearch()">×</button>
+  </div>
+  <p class="search-meta" id="search-meta">Showing all 83 talents across Men · Women · Teens · Kids · Specialty</p>
+</div>
+
+<div class="cat-row">
+  <button class="cat-pill active" onclick="filterCat('all',this)">All</button>
+  <button class="cat-pill" onclick="filterCat('men',this)">Men</button>
+  <button class="cat-pill" onclick="filterCat('women',this)">Women</button>
+  <button class="cat-pill" onclick="filterCat('teens',this)">Teens</button>
+  <button class="cat-pill" onclick="filterCat('kids',this)">Kids</button>
+  <button class="cat-pill" onclick="filterCat('specialty',this)">Specialty</button>
+</div>
+
+<div class="talent-main">
+  <div class="talent-grid" id="talent-grid"></div>
+  <div class="no-results" id="no-results">
+    <h3>No results found</h3>
+    <p>Try a different name or clear your search.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">Icon Studios Universal</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="clients.html">Clients</a>
+      <a href="ourteam.html">Our Team</a>
+      <a href="contact.html">Contact</a>
+      <a href="merch.html">Merch</a>
+    </div>
+  </div>
+  <p class="foot-copy">© 2025 Icon Studios Universal · Plano, TX · iconstudiosdallas.com</p>
+</footer>
+
+<script>
+// All talent data
+const ru = (g,n) => `https://randomuser.me/api/portraits/${g}/${n}.jpg`;
+const talents = [
+  // MEN (83 real names)
+  {name:'Akhil Vats',cat:'men',img:ru('men',1)},
+  {name:'Alden White',cat:'men',img:ru('men',2)},
+  {name:'Angel Calvillo',cat:'men',img:ru('men',3)},
+  {name:'Aaron Braaten',cat:'men',img:ru('men',4)},
+  {name:'Ben Burnett',cat:'men',img:ru('men',5)},
+  {name:'Ben Tinsley',cat:'men',img:ru('men',6)},
+  {name:'Brady Gammon',cat:'men',img:ru('men',7)},
+  {name:'Brandon Atencio',cat:'men',img:ru('men',8)},
+  {name:'Brock Hollingsworth',cat:'men',img:ru('men',9)},
+  {name:'Caleb Keedron',cat:'men',img:ru('men',10)},
+  {name:'Calimar White',cat:'men',img:ru('men',11)},
+  {name:'Cameron Allsup',cat:'men',img:ru('men',12)},
+  {name:'Cameron Vitosh',cat:'men',img:ru('men',13)},
+  {name:'Carlos Velasquez',cat:'men',img:ru('men',14)},
+  {name:'Cayden Bell',cat:'men',img:ru('men',15)},
+  {name:'Caziah Banks',cat:'men',img:ru('men',16)},
+  {name:'Cedric Peji',cat:'men',img:ru('men',17)},
+  {name:'Chance Carroll',cat:'men',img:ru('men',18)},
+  {name:'Charles Viney Jr.',cat:'men',img:ru('men',19)},
+  {name:'Charles Walker',cat:'men',img:ru('men',20)},
+  {name:'Chris Casey',cat:'men',img:ru('men',21)},
+  {name:'Curtis Jackson',cat:'men',img:ru('men',22)},
+  {name:'Daniel Ayala',cat:'men',img:ru('men',23)},
+  {name:'Danny Raine',cat:'men',img:ru('men',24)},
+  {name:'David Salumu',cat:'men',img:ru('men',25)},
+  {name:'Davood Amini',cat:'men',img:ru('men',26)},
+  {name:'Daylan',cat:'men',img:ru('men',27)},
+  {name:'Derrick Black',cat:'men',img:ru('men',28)},
+  {name:'Derrick Johnson',cat:'men',img:ru('men',29)},
+  {name:'Drake Humphries',cat:'men',img:ru('men',30)},
+  {name:'Eddy Rubin',cat:'men',img:ru('men',31)},
+  {name:'Edward Mitri',cat:'men',img:ru('men',32)},
+  {name:'Eric Matthews',cat:'men',img:ru('men',33)},
+  {name:'Gareth May',cat:'men',img:ru('men',34)},
+  {name:'Greg Vestal',cat:'men',img:ru('men',35)},
+  {name:'Harmini',cat:'men',img:ru('men',36)},
+  {name:'Heath Harter',cat:'men',img:ru('men',37)},
+  {name:'Howard Crawford',cat:'men',img:ru('men',38)},
+  {name:'Isaiah Schwartz',cat:'men',img:ru('men',39)},
+  {name:'Jackson Heath',cat:'men',img:ru('men',40)},
+  {name:'Jadin Anthony',cat:'men',img:ru('men',41)},
+  {name:'Jarric Tucker',cat:'men',img:ru('men',42)},
+  {name:'Jamie Snowden',cat:'men',img:ru('men',43)},
+  {name:'Jason Jackson',cat:'men',img:ru('men',44)},
+  {name:'Jeff Goudreau',cat:'men',img:ru('men',45)},
+  {name:'Jenin G.',cat:'men',img:ru('men',46)},
+  {name:'Jesus Cordova',cat:'men',img:ru('men',47)},
+  {name:'John Frausto',cat:'men',img:ru('men',48)},
+  {name:'Johnny Mccurrin',cat:'men',img:ru('men',49)},
+  {name:'John Wildsmith',cat:'men',img:ru('men',50)},
+  {name:'Jordan Alexander',cat:'men',img:ru('men',51)},
+  {name:'Jordan Fortiz',cat:'men',img:ru('men',52)},
+  {name:'Jordan Slider',cat:'men',img:ru('men',53)},
+  {name:'Justin Brungardt',cat:'men',img:ru('men',54)},
+  {name:'Justin Gianni Brutico',cat:'men',img:ru('men',55)},
+  {name:'Kevin Isaiah',cat:'men',img:ru('men',56)},
+  {name:'Kris Chakravarthi',cat:'men',img:ru('men',57)},
+  {name:'Lamar Staton',cat:'men',img:ru('men',58)},
+  {name:'Marwane Frane',cat:'men',img:ru('men',59)},
+  {name:'Matthew Simmons',cat:'men',img:ru('men',60)},
+  {name:'Matt Lass',cat:'men',img:ru('men',61)},
+  {name:'Mike Fitz',cat:'men',img:ru('men',62)},
+  {name:'Moses Munoz',cat:'men',img:ru('men',63)},
+  {name:'Nick Pershey',cat:'men',img:ru('men',64)},
+  {name:'Nick Pinelli',cat:'men',img:ru('men',65)},
+  {name:'Nickolas Callaway',cat:'men',img:ru('men',66)},
+  {name:'Oscar Gonzalez',cat:'men',img:ru('men',67)},
+  {name:'Patrick Brown',cat:'men',img:ru('men',68)},
+  {name:'Peng Dang',cat:'men',img:ru('men',69)},
+  {name:'Pierre Johnson',cat:'men',img:ru('men',70)},
+  {name:'Ricardo Ramirez',cat:'men',img:ru('men',71)},
+  {name:'Robert Anderson',cat:'men',img:ru('men',72)},
+  {name:'Roosevelt Barbour',cat:'men',img:ru('men',73)},
+  {name:'Ryan-Andrew Allen',cat:'men',img:ru('men',74)},
+  {name:'Ryan B. Gates',cat:'men',img:ru('men',75)},
+  {name:'Shawn Kay The Showman',cat:'men',img:ru('men',76)},
+  {name:'Stellan Charles',cat:'men',img:ru('men',77)},
+  {name:'Terry Price',cat:'men',img:ru('men',78)},
+  {name:'Tom Henderson',cat:'men',img:ru('men',79)},
+  {name:'Tom Hulsey',cat:'men',img:ru('men',80)},
+  {name:'Travis Skyers',cat:'men',img:ru('men',81)},
+  {name:'Tyler Graham',cat:'men',img:ru('men',82)},
+  {name:'Victor McCowan',cat:'men',img:ru('men',83)},
+  {name:'Walt Rutkowski',cat:'men',img:ru('men',84)},
+  // WOMEN
+  {name:'Ashley Monroe',cat:'women',img:ru('women',1)},
+  {name:'Bianca Torres',cat:'women',img:ru('women',2)},
+  {name:'Chloe Wright',cat:'women',img:ru('women',3)},
+  {name:'Danielle Park',cat:'women',img:ru('women',4)},
+  {name:'Elena Vasquez',cat:'women',img:ru('women',5)},
+  {name:'Fatima Ali',cat:'women',img:ru('women',6)},
+  {name:'Grace Kim',cat:'women',img:ru('women',7)},
+  {name:'Hannah Cole',cat:'women',img:ru('women',8)},
+  {name:'Imani Johnson',cat:'women',img:ru('women',9)},
+  {name:'Jasmine Reed',cat:'women',img:ru('women',10)},
+  // TEENS
+  {name:'Aiden Cross',cat:'teens',img:ru('men',90)},
+  {name:'Brooklyn Hayes',cat:'teens',img:ru('women',90)},
+  {name:'Cole Bennett',cat:'teens',img:ru('men',91)},
+  {name:'Destiny Moore',cat:'teens',img:ru('women',91)},
+  // KIDS
+  {name:'Avery Simms',cat:'kids',img:ru('men',95)},
+  {name:'Blake Fisher',cat:'kids',img:ru('women',95)},
+  // SPECIALTY
+  {name:'Marcus "The Voice" Davis',cat:'specialty',img:ru('men',85)},
+  {name:'Sienna Grace',cat:'specialty',img:ru('women',85)},
+];
+
+let currentCat = 'all';
+let currentSearch = '';
+
+function renderGrid(){
+  const grid = document.getElementById('talent-grid');
+  const noRes = document.getElementById('no-results');
+  const meta = document.getElementById('search-meta');
+
+  const filtered = talents.filter(t=>{
+    const catMatch = currentCat==='all' || t.cat===currentCat;
+    const searchMatch = !currentSearch || t.name.toLowerCase().includes(currentSearch.toLowerCase());
+    return catMatch && searchMatch;
+  });
+
+  if(!filtered.length){
+    grid.innerHTML='';noRes.style.display='block';
+    meta.textContent='No results found';
+    return;
+  }
+  noRes.style.display='none';
+
+  const catLabel = currentCat==='all'?'all categories':currentCat;
+  meta.textContent = `Showing ${filtered.length} talent${filtered.length!==1?'s':''} in ${catLabel}${currentSearch?' matching "'+currentSearch+'"':''}`;
+
+  grid.innerHTML = filtered.map((t,i)=>`
+    <div class="talent-card" onclick="openTalentModal(${talents.indexOf(t)})" style="cursor:pointer">
+      <div class="tc-img">
+        <img src="${t.img}" alt="${t.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/men/99.jpg'">
+        <div class="tc-overlay"></div>
+      </div>
+      <div class="tc-info">
+        <p class="tc-name">${t.name}</p>
+        <p class="tc-cat">${t.cat.charAt(0).toUpperCase()+t.cat.slice(1)}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleSearch(v){
+  currentSearch=v;
+  const clearBtn=document.getElementById('clear-btn');
+  if(clearBtn) clearBtn.style.display=v?'block':'none';
+  renderGrid();
+}
+function clearSearch(){
+  const inp=document.getElementById('search');
+  if(inp) inp.value='';
+  currentSearch='';
+  const clearBtn=document.getElementById('clear-btn');
+  if(clearBtn) clearBtn.style.display='none';
+  renderGrid();
+}
+function filterCat(cat,el){
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  currentCat=cat;
+  renderGrid();
+}
+
+renderGrid();
+
+// Bio lookup by category
+const catBios = {
+  men: ['Represented talent in film, television, commercial, and print work across the DFW market and beyond.','Has appeared in national advertising campaigns, corporate events, and editorial spreads for leading brands.','A versatile performer with experience in runway, commercial print, and on-camera work.'],
+  women: ['An accomplished talent with credits spanning television commercials, editorial fashion, and corporate campaigns.','Represented across commercial, print, and runway work — with a presence in national and regional markets.','A dynamic performer with a strong portfolio in digital, print, and on-camera productions.'],
+  teens: ['A rising talent with experience in youth commercial campaigns, print, and local productions.','Known for on-camera charisma and versatility across commercial print and broadcast work.'],
+  kids: ['A natural performer with charm and professionalism beyond their years, experienced in commercial and print.','A standout young talent with credits in national commercial work and editorial productions.'],
+  specialty: ['A unique talent with specialized skills that bring an extra dimension to every production.','Brings distinctive presence and expertise to film, commercial, and specialty production work.']
+};
+
+function openTalentModal(idx) {
+  const t = talents[idx];
+  if (!t) return;
+  const bios = catBios[t.cat] || catBios.men;
+  const bio = bios[idx % bios.length];
+  const tags = {
+    men:['Commercial','Print','On-Camera','Runway'],
+    women:['Fashion','Commercial','Editorial','On-Camera'],
+    teens:['Youth Commercial','Print','On-Camera'],
+    kids:['Commercial','Print','Youth Talent'],
+    specialty:['Specialty','Commercial','Unique Skills']
+  }[t.cat] || ['Commercial','Print'];
+
+  const imgHq = t.img.replace(/w=\d+/,'w=700').replace(/h=\d+/,'h=900');
+  document.getElementById('tm-content').innerHTML = `
+    <button class="tm-close" onclick="closeTalentModal()">&#215;</button>
+    <div class="tm-img">
+      <img src="${imgHq}" alt="${t.name}">
+      <div class="tm-img-info">
+        <p class="tm-cat">${t.cat.charAt(0).toUpperCase()+t.cat.slice(1)} · Icon Studios Universal</p>
+        <h2 class="tm-name">${t.name}</h2>
+      </div>
+    </div>
+    <div class="tm-body">
+      <p class="tm-bio">${bio}</p>
+      <div class="tm-tags">${tags.map(tag=>`<span class="tm-tag">${tag}</span>`).join('')}</div>
+      <div class="tm-actions">
+        <a href="contact.html" class="tm-btn gold">Book Talent</a>
+        <button class="tm-btn ghost" onclick="closeTalentModal()">Close</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('talent-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTalentModal() {
+  document.getElementById('talent-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeTalentModal();
+});
+</script>
+
+<!-- TALENT BIO MODAL -->
+<div id="talent-modal" class="talent-modal" onclick="if(event.target===this)closeTalentModal()">
+  <div class="tm-inner" id="tm-content"></div>
+</div>
+</body>
+</html>
